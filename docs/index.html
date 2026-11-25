@@ -38,23 +38,25 @@
             <option value="name-desc">Nama Z–A</option>
           </select>
         </label>
-        <label class="copy-format">
-          <span class="visually-hidden">Format copy</span>
-          <select id="copy-format" title="Format yang di-copy saat nama/kartu diklik">
-            <option value="name">Copy: Nama</option>
-            <option value="id">Copy: ID</option>
-            <option value="name-id" selected>Copy: Nama (ID)</option>
-            <option value="name-id-coin">Copy: Nama (ID) + coin</option>
-          </select>
-        </label>
       </div>
 
-      <div class="chips" id="coin-chips" role="group" aria-label="Filter coin">
-        <button type="button" data-coin="all" class="chip is-active">Semua</button>
-        <button type="button" data-coin="one" class="chip">1 coin</button>
-        <button type="button" data-coin="lt100" class="chip">&lt;100</button>
-        <button type="button" data-coin="mid" class="chip">100–1.000</button>
-        <button type="button" data-coin="high" class="chip">1.000+</button>
+      <div class="chips-row">
+        <div class="chips" id="coin-chips" role="group" aria-label="Filter coin">
+          <span class="chips-label">Coin</span>
+          <button type="button" data-coin="all" class="chip is-active">Semua</button>
+          <button type="button" data-coin="one" class="chip">1 coin</button>
+          <button type="button" data-coin="lt100" class="chip">&lt;100</button>
+          <button type="button" data-coin="mid" class="chip">100–1.000</button>
+          <button type="button" data-coin="high" class="chip">1.000+</button>
+        </div>
+
+        <div class="chips" id="copy-chips" role="group" aria-label="Format copy">
+          <span class="chips-label">Copy</span>
+          <button type="button" data-copy="name" class="chip">Nama</button>
+          <button type="button" data-copy="id" class="chip">ID</button>
+          <button type="button" data-copy="name-id" class="chip is-active">Nama (ID)</button>
+          <button type="button" data-copy="name-id-coin" class="chip">Nama (ID) + coin</button>
+        </div>
       </div>
     </header>
 

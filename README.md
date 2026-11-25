@@ -58,7 +58,7 @@ npm run web         # preview lokal: http://127.0.0.1:4321/
 Fitur galeri: grid gambar + nama + id + coin, search (nama/id), filter coin
 (`1`, `<100`, `100–1.000`, `1.000+`), sort, "Muat lagi" per 100 kartu, filter tersimpan di URL hash.
 
-Format copy bisa dipilih di toolbar (**Copy:**):
+Format copy bisa dipilih lewat chip **Copy** di toolbar (gaya sama seperti filter coin):
 
 | Pilihan | Hasil |
 | --- | --- |

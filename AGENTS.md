@@ -71,7 +71,7 @@ Entri di-dedupe per `name`, diurutkan `coin` naik → `displayName` → `name`.
   `https://<user>.github.io/<repo>/`). Jangan tambah endpoint/server-side.
 - `docs/gifts.json` adalah file generated — jangan diedit manual; jalankan `npm run build:web`.
 - `.nojekyll` wajib ada di `docs/` supaya GitHub Pages tidak memproses file lewat Jekyll.
-- Perilaku copy: klik nama/kartu → format dari dropdown `Copy:` (`name`, `id`, `name-id`,
+- Perilaku copy: klik nama/kartu → format dari chip `Copy` (`name`, `id`, `name-id`,
   `name-id-coin`); klik chip id → `id` saja. Pilihan format disimpan di `localStorage`
   (`gift-db:copy-format`), bukan di URL hash.
 - Gambar dimuat langsung dari CDN TikTok dengan `referrerpolicy="no-referrer"`; jangan ganti ke proxy

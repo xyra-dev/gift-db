@@ -106,8 +106,7 @@ body {
 }
 
 .search input,
-.sort select,
-.copy-format select {
+.sort select {
   width: 100%;
   padding: 10px 12px;
   border-radius: 10px;
@@ -120,15 +119,28 @@ body {
 }
 
 .search input:focus,
-.sort select:focus,
-.copy-format select:focus {
+.sort select:focus {
   border-color: rgb(37 244 238 / 0.6);
   box-shadow: 0 0 0 3px rgb(37 244 238 / 0.12);
 }
 
-.sort,
-.copy-format {
-  flex: 0 1 170px;
+.sort {
+  flex: 0 0 150px;
+}
+
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+
+.chips-label {
+  align-self: center;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .chips {

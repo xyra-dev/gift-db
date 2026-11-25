@@ -29,7 +29,7 @@ const el = {
   grid: document.getElementById('grid'),
   search: document.getElementById('search'),
   sort: document.getElementById('sort'),
-  copyFormat: document.getElementById('copy-format'),
+  copyChips: document.getElementById('copy-chips'),
   chips: document.getElementById('coin-chips'),
   result: document.getElementById('result'),
   empty: document.getElementById('empty'),
@@ -219,9 +219,14 @@ function bindControls() {
     render();
   });
 
-  el.copyFormat.addEventListener('change', () => {
-    const value = el.copyFormat.value;
+  el.copyChips.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-copy]');
+    if (!button) return;
+    const value = button.dataset.copy;
     state.copyFormat = COPY_FORMATS[value] ? value : 'name-id';
+    for (const chip of el.copyChips.querySelectorAll('.chip')) {
+      chip.classList.toggle('is-active', chip === button);
+    }
     try {
       localStorage.setItem(COPY_STORAGE_KEY, state.copyFormat);
     } catch {
@@ -246,7 +251,9 @@ function bindControls() {
 function applyStateToControls() {
   el.search.value = state.query;
   el.sort.value = state.sort;
-  el.copyFormat.value = state.copyFormat;
+  for (const chip of el.copyChips.querySelectorAll('.chip')) {
+    chip.classList.toggle('is-active', chip.dataset.copy === state.copyFormat);
+  }
   for (const chip of el.chips.querySelectorAll('.chip')) {
     chip.classList.toggle('is-active', chip.dataset.coin === state.coin);
   }
