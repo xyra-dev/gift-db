@@ -16,10 +16,20 @@ const SORTS = {
   'name-desc': (a, b) => compareName(b, a),
 };
 
+const COPY_FORMATS = {
+  name: (gift) => gift.displayName,
+  id: (gift) => gift.name,
+  'name-id': (gift) => `${gift.displayName} (${gift.name})`,
+  'name-id-coin': (gift) => `${gift.displayName} (${gift.name}) · ${formatCoin(gift.coin)} coin`,
+};
+
+const COPY_STORAGE_KEY = 'gift-db:copy-format';
+
 const el = {
   grid: document.getElementById('grid'),
   search: document.getElementById('search'),
   sort: document.getElementById('sort'),
+  copyFormat: document.getElementById('copy-format'),
   chips: document.getElementById('coin-chips'),
   result: document.getElementById('result'),
   empty: document.getElementById('empty'),
@@ -35,8 +45,18 @@ const state = {
   query: '',
   coin: 'all',
   sort: 'coin-asc',
+  copyFormat: 'name-id',
   rendered: 0,
 };
+
+function copyText(gift) {
+  const format = COPY_FORMATS[state.copyFormat] ?? COPY_FORMATS['name-id'];
+  return format(gift);
+}
+
+function copyGift(gift) {
+  copy(copyText(gift));
+}
 
 function compareName(a, b) {
   return a.displayName.localeCompare(b.displayName, 'id', { sensitivity: 'base' });
@@ -62,7 +82,7 @@ function currentList() {
 function createCard(gift) {
   const card = document.createElement('article');
   card.className = 'card';
-  card.title = `Copy "${gift.displayName} (${gift.name})"`;
+  card.title = `Copy "${copyText(gift)}"`;
 
   const thumb = document.createElement('div');
   thumb.className = 'thumb';
@@ -92,8 +112,8 @@ function createCard(gift) {
   name.type = 'button';
   name.className = 'gift-name';
   name.textContent = gift.displayName;
-  name.title = `Copy "${gift.displayName} (${gift.name})"`;
-  name.addEventListener('click', () => copy(`${gift.displayName} (${gift.name})`));
+  name.title = `Copy "${copyText(gift)}"`;
+  name.addEventListener('click', () => copyGift(gift));
 
   const id = document.createElement('button');
   id.type = 'button';
@@ -105,7 +125,7 @@ function createCard(gift) {
   card.append(thumb, name, id);
   card.addEventListener('click', (event) => {
     if (event.target.closest('button')) return;
-    copy(`${gift.displayName} (${gift.name})`);
+    copyGift(gift);
   });
 
   return card;
@@ -199,6 +219,17 @@ function bindControls() {
     render();
   });
 
+  el.copyFormat.addEventListener('change', () => {
+    const value = el.copyFormat.value;
+    state.copyFormat = COPY_FORMATS[value] ? value : 'name-id';
+    try {
+      localStorage.setItem(COPY_STORAGE_KEY, state.copyFormat);
+    } catch {
+      /* localStorage bisa diblokir di mode privat */
+    }
+    render();
+  });
+
   el.chips.addEventListener('click', (event) => {
     const button = event.target.closest('button[data-coin]');
     if (!button) return;
@@ -215,6 +246,7 @@ function bindControls() {
 function applyStateToControls() {
   el.search.value = state.query;
   el.sort.value = state.sort;
+  el.copyFormat.value = state.copyFormat;
   for (const chip of el.chips.querySelectorAll('.chip')) {
     chip.classList.toggle('is-active', chip.dataset.coin === state.coin);
   }
@@ -223,6 +255,12 @@ function applyStateToControls() {
 async function init() {
   bindControls();
   readHash();
+  try {
+    const saved = localStorage.getItem(COPY_STORAGE_KEY);
+    if (saved && COPY_FORMATS[saved]) state.copyFormat = saved;
+  } catch {
+    /* localStorage bisa diblokir di mode privat */
+  }
   applyStateToControls();
 
   try {

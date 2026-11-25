@@ -106,7 +106,8 @@ body {
 }
 
 .search input,
-.sort select {
+.sort select,
+.copy-format select {
   width: 100%;
   padding: 10px 12px;
   border-radius: 10px;
@@ -119,13 +120,15 @@ body {
 }
 
 .search input:focus,
-.sort select:focus {
+.sort select:focus,
+.copy-format select:focus {
   border-color: rgb(37 244 238 / 0.6);
   box-shadow: 0 0 0 3px rgb(37 244 238 / 0.12);
 }
 
-.sort {
-  flex: 0 0 150px;
+.sort,
+.copy-format {
+  flex: 0 1 170px;
 }
 
 .chips {

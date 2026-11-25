@@ -57,7 +57,17 @@ npm run web         # preview lokal: http://127.0.0.1:4321/
 
 Fitur galeri: grid gambar + nama + id + coin, search (nama/id), filter coin
 (`1`, `<100`, `100–1.000`, `1.000+`), sort, "Muat lagi" per 100 kartu, filter tersimpan di URL hash.
-Klik nama/kartu → copy `Nama (id)`; klik id → copy id saja.
+
+Format copy bisa dipilih di toolbar (**Copy:**):
+
+| Pilihan | Hasil |
+| --- | --- |
+| Nama | `Rose` |
+| ID | `5655` |
+| Nama (ID) | `Rose (5655)` |
+| Nama (ID) + coin | `Rose (5655) · 1 coin` |
+
+Klik nama/kartu → pakai format terpilih (disimpan di `localStorage`). Klik chip `#id` selalu copy id saja.
 
 Deploy: push repo ke GitHub → **Settings → Pages → Branch `main`, folder `/docs`**.
 Situs: `https://<user>.github.io/<repo>/`. Repo harus publik. Setelah data di-dump ulang:
