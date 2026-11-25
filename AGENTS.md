@@ -82,6 +82,11 @@ Entri di-dedupe per `name`, diurutkan `coin` naik → `displayName` → `name`.
   Jangan ubah ke `type="module"`. Hindari juga optional chaining (`?.`), nullish (`??`),
   `replaceChildren`, CSS `aspect-ratio`, dan properti `translate` — sudah diganti versi yang aman
   untuk WebView/browser HP lama. Ada watchdog `#boot-error` (5 detik) kalau JS gagal jalan.
+- **Cache mismatch**: GitHub Pages nge-cache HTML ±10 menit. Setiap kali `app.js`/`style.css` berubah,
+  bump query `?v=` di `docs/index.html` supaya HTML dan aset selalu sinkron. Jangan asumsikan DOM
+  lengkap: semua elemen opsional (mis. `#copy-chips`) wajib di-guard `if (el.x)`, karena HTML lama
+  yang masih ter-cache bisa dipasangkan dengan JS baru. Ada `showFatal()` + listener
+  `error`/`unhandledrejection` yang menampilkan pesan alih-alih diam di "memuat…".
 
 ## Aturan
 

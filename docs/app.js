@@ -219,21 +219,23 @@ function bindControls() {
     render();
   });
 
-  el.copyChips.addEventListener('click', (event) => {
-    const button = event.target.closest('button[data-copy]');
-    if (!button) return;
-    const value = button.dataset.copy;
-    state.copyFormat = COPY_FORMATS[value] ? value : 'name-id';
-    for (const chip of el.copyChips.querySelectorAll('.chip')) {
-      chip.classList.toggle('is-active', chip === button);
-    }
-    try {
-      localStorage.setItem(COPY_STORAGE_KEY, state.copyFormat);
-    } catch {
-      /* localStorage bisa diblokir di mode privat */
-    }
-    render();
-  });
+  if (el.copyChips) {
+    el.copyChips.addEventListener('click', (event) => {
+      const button = event.target.closest('button[data-copy]');
+      if (!button) return;
+      const value = button.dataset.copy;
+      state.copyFormat = COPY_FORMATS[value] ? value : 'name-id';
+      for (const chip of el.copyChips.querySelectorAll('.chip')) {
+        chip.classList.toggle('is-active', chip === button);
+      }
+      try {
+        localStorage.setItem(COPY_STORAGE_KEY, state.copyFormat);
+      } catch {
+        /* localStorage bisa diblokir di mode privat */
+      }
+      render();
+    });
+  }
 
   el.chips.addEventListener('click', (event) => {
     const button = event.target.closest('button[data-coin]');
@@ -251,29 +253,47 @@ function bindControls() {
 function applyStateToControls() {
   el.search.value = state.query;
   el.sort.value = state.sort;
-  for (const chip of el.copyChips.querySelectorAll('.chip')) {
-    chip.classList.toggle('is-active', chip.dataset.copy === state.copyFormat);
+  if (el.copyChips) {
+    for (const chip of el.copyChips.querySelectorAll('.chip')) {
+      chip.classList.toggle('is-active', chip.dataset.copy === state.copyFormat);
+    }
   }
   for (const chip of el.chips.querySelectorAll('.chip')) {
     chip.classList.toggle('is-active', chip.dataset.coin === state.coin);
   }
 }
 
+function showFatal(error) {
+  const message = (error && error.message) || String(error);
+  if (el.empty) {
+    el.empty.hidden = false;
+    el.empty.textContent = 'Gagal memuat halaman: ' + message + '. Coba refresh.';
+  }
+  const boot = document.getElementById('boot-error');
+  if (boot) {
+    boot.hidden = false;
+    boot.textContent = 'Error: ' + message;
+  }
+}
+
+window.addEventListener('error', (event) => showFatal(event.error || event.message));
+window.addEventListener('unhandledrejection', (event) => showFatal(event.reason));
+
 async function init() {
   window.__giftDbBoot = true;
-  bindControls();
-  readHash();
   try {
-    const saved = localStorage.getItem(COPY_STORAGE_KEY);
-    if (saved && COPY_FORMATS[saved]) state.copyFormat = saved;
-  } catch {
-    /* localStorage bisa diblokir di mode privat */
-  }
-  applyStateToControls();
+    bindControls();
+    readHash();
+    try {
+      const saved = localStorage.getItem(COPY_STORAGE_KEY);
+      if (saved && COPY_FORMATS[saved]) state.copyFormat = saved;
+    } catch {
+      /* localStorage bisa diblokir di mode privat */
+    }
+    applyStateToControls();
 
-  try {
     const response = await fetch(DATA_URL, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) throw new Error('HTTP ' + response.status);
     const data = await response.json();
 
     state.gifts = Array.isArray(data.gifts) ? data.gifts : [];
@@ -287,9 +307,7 @@ async function init() {
 
     render();
   } catch (error) {
-    el.result.textContent = '';
-    el.empty.hidden = false;
-    el.empty.textContent = `Gagal memuat data gift (${error.message}). Jalankan "npm run build:web" dulu.`;
+    showFatal(error);
   }
 }
 
