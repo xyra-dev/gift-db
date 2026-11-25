@@ -71,6 +71,22 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <script type="module" src="./app.js"></script>
+    <p class="empty" id="boot-error" hidden>
+      Aplikasi gagal dimuat di browser ini. Coba Chrome/Safari versi terbaru, atau refresh halaman.
+    </p>
+
+    <noscript>
+      <p class="empty">Halaman ini butuh JavaScript. Aktifkan JavaScript lalu refresh.</p>
+    </noscript>
+
+    <script>
+      window.__giftDbBoot = false;
+      setTimeout(function () {
+        if (window.__giftDbBoot) return;
+        var box = document.getElementById('boot-error');
+        if (box) box.hidden = false;
+      }, 5000);
+    </script>
+    <script defer src="./app.js"></script>
   </body>
 </html>

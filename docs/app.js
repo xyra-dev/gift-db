@@ -50,7 +50,7 @@ const state = {
 };
 
 function copyText(gift) {
-  const format = COPY_FORMATS[state.copyFormat] ?? COPY_FORMATS['name-id'];
+  const format = COPY_FORMATS[state.copyFormat] || COPY_FORMATS['name-id'];
   return format(gift);
 }
 
@@ -68,7 +68,7 @@ function formatCoin(coin) {
 
 function currentList() {
   const query = state.query.trim().toLowerCase();
-  const coinFilter = COIN_FILTERS[state.coin] ?? COIN_FILTERS.all;
+  const coinFilter = COIN_FILTERS[state.coin] || COIN_FILTERS.all;
 
   return state.gifts
     .filter((gift) => {
@@ -76,7 +76,7 @@ function currentList() {
       if (!query) return true;
       return gift.displayName.toLowerCase().includes(query) || gift.name.includes(query);
     })
-    .sort(SORTS[state.sort] ?? SORTS['coin-asc']);
+    .sort(SORTS[state.sort] || SORTS['coin-asc']);
 }
 
 function createCard(gift) {
@@ -135,7 +135,7 @@ function render({ reset = true } = {}) {
   const list = currentList();
 
   if (reset) {
-    el.grid.replaceChildren();
+    while (el.grid.firstChild) el.grid.removeChild(el.grid.firstChild);
     state.rendered = 0;
   }
 
@@ -162,7 +162,7 @@ function showToast(message) {
 
 async function copy(text) {
   try {
-    if (!navigator.clipboard?.writeText) throw new Error('clipboard unavailable');
+    if (!navigator.clipboard || !navigator.clipboard.writeText) throw new Error('clipboard unavailable');
     await navigator.clipboard.writeText(text);
   } catch {
     const area = document.createElement('textarea');
@@ -196,9 +196,9 @@ function syncHash() {
 
 function readHash() {
   const params = new URLSearchParams(location.hash.slice(1));
-  const query = params.get('q') ?? '';
-  const coin = params.get('coin') ?? 'all';
-  const sort = params.get('sort') ?? 'coin-asc';
+  const query = params.get('q') || '';
+  const coin = params.get('coin') || 'all';
+  const sort = params.get('sort') || 'coin-asc';
   if (query) state.query = query;
   if (COIN_FILTERS[coin]) state.coin = coin;
   if (SORTS[sort]) state.sort = sort;
@@ -260,6 +260,7 @@ function applyStateToControls() {
 }
 
 async function init() {
+  window.__giftDbBoot = true;
   bindControls();
   readHash();
   try {
@@ -276,11 +277,11 @@ async function init() {
     const data = await response.json();
 
     state.gifts = Array.isArray(data.gifts) ? data.gifts : [];
-    const region = data.region ?? '—';
+    const region = data.region || '—';
     el.region.textContent = region;
     el.totalCount.textContent = `${state.gifts.length.toLocaleString('id-ID')} gift`;
     el.updatedAt.textContent = data.updatedAt
-      ? new Date(data.updatedAt).toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })
+      ? new Date(data.updatedAt).toLocaleString('id-ID')
       : 'belum ada data';
     document.title = `TikTok Gift DB ${region} — ${state.gifts.length} gift`;
 

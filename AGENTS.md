@@ -78,6 +78,10 @@ Entri di-dedupe per `name`, diurutkan `coin` naik → `displayName` → `name`.
   (tidak ada backend).
 - Filter disimpan di URL hash (`#q=...&coin=...&sort=...`) — pertahankan format ini.
 - Preview lokal: `npm run web` (port via env `PORT`, bind 127.0.0.1, guard path traversal).
+- Kompatibilitas HP: `docs/app.js` dimuat sebagai **classic script** (`<script defer>`), bukan ES module.
+  Jangan ubah ke `type="module"`. Hindari juga optional chaining (`?.`), nullish (`??`),
+  `replaceChildren`, CSS `aspect-ratio`, dan properti `translate` — sudah diganti versi yang aman
+  untuk WebView/browser HP lama. Ada watchdog `#boot-error` (5 detik) kalau JS gagal jalan.
 
 ## Aturan
 

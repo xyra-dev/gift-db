@@ -214,9 +214,8 @@ main {
 
 .thumb {
   position: relative;
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
+  width: 100%;
+  padding-bottom: 100%;
   margin-bottom: 8px;
   border-radius: 10px;
   background: #101017;
@@ -224,6 +223,9 @@ main {
 }
 
 .thumb img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -231,6 +233,10 @@ main {
 
 .thumb.missing::after {
   content: '🎁';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: 2rem;
   opacity: 0.35;
 }
@@ -319,7 +325,7 @@ main {
   position: fixed;
   left: 50%;
   bottom: 24px;
-  translate: -50% 12px;
+  transform: translate(-50%, 12px);
   padding: 10px 16px;
   border-radius: 10px;
   background: #f2f2f5;
@@ -328,7 +334,7 @@ main {
   font-weight: 600;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.18s, translate 0.18s;
+  transition: opacity 0.18s, transform 0.18s;
   max-width: min(90vw, 420px);
   text-align: center;
   box-shadow: var(--shadow);
@@ -336,7 +342,7 @@ main {
 
 .toast.is-visible {
   opacity: 1;
-  translate: -50% 0;
+  transform: translate(-50%, 0);
 }
 
 @media (max-width: 520px) {

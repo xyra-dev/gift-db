@@ -77,6 +77,11 @@ npm run build:web
 git add docs/gifts.json && git commit -m "refresh gifts" && git push
 ```
 
+Troubleshooting HP: kalau halaman berhenti di "memuat…", pastikan JS aktif dan pakai
+Chrome/Safari versi terbaru (bukan browser dalam aplikasi). Versi sekarang sudah kompatibel
+dengan WebView lama (classic script, tanpa `??`/`?.`), dan menampilkan pesan error kalau
+JS gagal dimuat dalam 5 detik.
+
 ## Format `data/gifts.json`
 
 ```json
