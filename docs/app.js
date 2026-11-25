@@ -303,7 +303,7 @@ async function init() {
     el.updatedAt.textContent = data.updatedAt
       ? new Date(data.updatedAt).toLocaleString('id-ID')
       : 'belum ada data';
-    document.title = `TikTok Gift DB ${region} — ${state.gifts.length} gift`;
+    document.title = `Katalog Gift TikTok (${region}) — Xyra Streamer Hub`;
 
     render();
   } catch (error) {
