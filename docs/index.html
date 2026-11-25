@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TikTok Gift DB — Galeri Gift</title>
+    <meta name="description" content="Katalog gift TikTok LIVE: gambar, nama, id, dan harga coin." />
+    <meta name="color-scheme" content="dark" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8E%81%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <h1>Gift DB</h1>
+        <div class="meta">
+          <span class="badge" id="region-badge">—</span>
+          <span id="updated-at">memuat…</span>
+          <span class="dot">·</span>
+          <span id="total-count">0 gift</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <label class="search">
+          <span class="visually-hidden">Cari gift</span>
+          <input id="search" type="search" placeholder="Cari nama atau id…" autocomplete="off" spellcheck="false" />
+        </label>
+        <label class="sort">
+          <span class="visually-hidden">Urutkan</span>
+          <select id="sort">
+            <option value="coin-asc">Coin ↑</option>
+            <option value="coin-desc">Coin ↓</option>
+            <option value="name-asc">Nama A–Z</option>
+            <option value="name-desc">Nama Z–A</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="chips" id="coin-chips" role="group" aria-label="Filter coin">
+        <button type="button" data-coin="all" class="chip is-active">Semua</button>
+        <button type="button" data-coin="one" class="chip">1 coin</button>
+        <button type="button" data-coin="lt100" class="chip">&lt;100</button>
+        <button type="button" data-coin="mid" class="chip">100–1.000</button>
+        <button type="button" data-coin="high" class="chip">1.000+</button>
+      </div>
+    </header>
+
+    <main>
+      <p class="result" id="result" aria-live="polite"></p>
+      <section class="grid" id="grid" aria-label="Daftar gift"></section>
+      <p class="empty" id="empty" hidden>Tidak ada gift yang cocok. Coba ubah kata kunci atau filter.</p>
+      <div class="more-wrap">
+        <button type="button" id="load-more" class="load-more" hidden>Muat lagi</button>
+      </div>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
