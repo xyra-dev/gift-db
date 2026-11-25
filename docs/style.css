@@ -1,22 +1,24 @@
 /* Xyra Streamer Hub — Katalog Gift TikTok
-   Tema gelap aksen ungu (Xyra Studio) */
+   Sistem Desain Glassmorphism & Electric Purple Glow */
 
 :root {
-  --bg: #0b0812;
-  --bg-soft: #120d1d;
-  --card: #171021;
-  --card-hover: #1e1530;
-  --line: #2b2144;
-  --text: #ede9f7;
-  --muted: #9d94b5;
+  --bg: #07050b;
+  --bg-soft: #0e0917;
+  --card: #130c22;
+  --card-hover: #1a102e;
+  --line: #271c42;
+  --line-bright: rgba(139, 92, 246, 0.35);
+  --text: #f3f0fa;
+  --muted: #9d94b8;
   --accent: #8b5cf6;
-  --accent-2: #a78bfa;
-  --accent-soft: rgba(139, 92, 246, 0.14);
+  --accent-2: #c084fc;
+  --accent-soft: rgba(139, 92, 246, 0.15);
   --glow: rgba(139, 92, 246, 0.35);
+  --glow-strong: rgba(139, 92, 246, 0.6);
   --ok: #34d399;
   --warn: #fbbf24;
   --radius: 16px;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --radius-lg: 22px;
 }
 
 * {
@@ -31,13 +33,14 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    radial-gradient(900px 500px at 85% -10%, rgba(139, 92, 246, 0.12), transparent 60%),
-    radial-gradient(700px 400px at -10% 30%, rgba(139, 92, 246, 0.07), transparent 55%),
+    radial-gradient(1000px 550px at 80% -5%, rgba(139, 92, 246, 0.15), transparent 60%),
+    radial-gradient(800px 500px at -10% 25%, rgba(124, 58, 237, 0.1), transparent 55%),
+    radial-gradient(600px 400px at 50% 85%, rgba(139, 92, 246, 0.06), transparent 50%),
     var(--bg);
   color: var(--text);
-  font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
 }
@@ -86,18 +89,19 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(11, 8, 18, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(7, 5, 11, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 .site-header .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  min-height: 62px;
-  flex-wrap: wrap;
+  gap: 16px;
+  min-height: 64px;
   padding-top: 8px;
   padding-bottom: 8px;
 }
@@ -105,11 +109,12 @@ a:hover {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   color: var(--text);
   font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  flex: 0 0 auto;
 }
 
 .brand:hover {
@@ -118,13 +123,19 @@ a:hover {
 
 .logo-tile {
   display: inline-block;
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   overflow: hidden;
   background: #fff;
-  box-shadow: 0 0 0 1px var(--line), 0 0 14px var(--glow);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15), 0 0 16px var(--glow);
   flex: 0 0 auto;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.brand:hover .logo-tile {
+  transform: scale(1.05);
+  box-shadow: 0 0 0 1px var(--accent-2), 0 0 22px var(--glow-strong);
 }
 
 .logo-tile img {
@@ -136,30 +147,44 @@ a:hover {
 
 .main-nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
+  align-items: center;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 4px 0;
+  max-width: 100%;
 }
+
+.main-nav::-webkit-scrollbar { display: none; }
 
 .main-nav a {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  padding: 6px 2px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: color 0.15s, background 0.15s;
 }
 
 .main-nav a:hover {
   color: var(--text);
+  background: rgba(139, 92, 246, 0.1);
   text-decoration: none;
 }
 
 .main-nav a[aria-current="page"] {
-  color: var(--accent-2);
+  color: #fff;
+  background: rgba(139, 92, 246, 0.22);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
 }
 
 /* ---------- catalog hero & controls ---------- */
 
 .catalog-hero {
-  padding: 44px 0 24px;
+  padding: 48px 0 26px;
 }
 
 .eyebrow {
@@ -173,40 +198,44 @@ a:hover {
 }
 
 .catalog-hero h1 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  letter-spacing: -0.03em;
   line-height: 1.2;
-  margin: 0 0 10px;
-  color: var(--text);
+  margin: 0 0 12px;
+  background: linear-gradient(135deg, #ffffff 40%, #c084fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .lead {
   color: var(--muted);
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   max-width: 680px;
-  margin: 0 0 16px;
-  line-height: 1.55;
+  margin: 0 0 18px;
+  line-height: 1.6;
 }
 
 .meta-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   color: var(--muted);
   font-size: 0.88rem;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
   flex-wrap: wrap;
 }
 
 .badge {
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(139, 92, 246, 0.5);
-  background: rgba(139, 92, 246, 0.15);
-  color: #ddd6fe;
-  font-weight: 600;
-  font-size: 0.8rem;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  background: rgba(139, 92, 246, 0.18);
+  color: var(--accent-2);
+  font-weight: 700;
+  font-size: 0.82rem;
   letter-spacing: 0.04em;
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.2);
 }
 
 .dot {
@@ -214,14 +243,14 @@ a:hover {
 }
 
 .controls-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  background: linear-gradient(180deg, rgba(19, 12, 34, 0.85) 0%, rgba(14, 9, 23, 0.95) 100%);
+  border: 1px solid rgba(139, 92, 246, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), 0 0 24px rgba(139, 92, 246, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .controls {
@@ -237,15 +266,15 @@ a:hover {
 .search input,
 .sort select {
   width: 100%;
-  padding: 10px 14px;
-  border-radius: 10px;
+  padding: 11px 16px;
+  border-radius: 12px;
   border: 1px solid var(--line);
   background: var(--bg-soft);
   color: var(--text);
   font: inherit;
   font-size: 0.92rem;
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: border-color 0.18s, box-shadow 0.18s;
 }
 
 .search input:focus,
@@ -255,13 +284,13 @@ a:hover {
 }
 
 .sort {
-  flex: 0 0 180px;
+  flex: 0 0 200px;
 }
 
 .chips-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 28px;
+  gap: 14px 30px;
 }
 
 .chips {
@@ -277,19 +306,19 @@ a:hover {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-right: 2px;
+  margin-right: 4px;
 }
 
 .chip {
-  padding: 6px 13px;
+  padding: 7px 14px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--bg-soft);
   color: var(--muted);
   font: inherit;
-  font-size: 0.82rem;
+  font-size: 0.83rem;
   cursor: pointer;
-  transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.15s;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 
 .chip:hover {
@@ -300,15 +329,15 @@ a:hover {
 .chip.is-active {
   color: #fff;
   border-color: transparent;
-  background: linear-gradient(135deg, var(--accent), #7c3aed);
-  font-weight: 600;
-  box-shadow: 0 3px 12px var(--glow);
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  font-weight: 700;
+  box-shadow: 0 3px 14px var(--glow);
 }
 
 /* ---------- catalog grid ---------- */
 
 .catalog-body {
-  padding-top: 10px;
+  padding-top: 14px;
   padding-bottom: 60px;
 }
 
@@ -320,7 +349,7 @@ a:hover {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
   gap: clamp(12px, 1.8vw, 18px);
 }
 
@@ -328,19 +357,19 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 12px;
-  border: 1px solid var(--line);
+  padding: 14px;
+  border: 1px solid rgba(139, 92, 246, 0.18);
   border-radius: var(--radius);
-  background: var(--card);
+  background: linear-gradient(180deg, rgba(19, 12, 34, 0.8) 0%, rgba(14, 9, 23, 0.95) 100%);
   cursor: copy;
-  transition: transform 0.15s, background 0.15s, border-color 0.15s, box-shadow 0.15s;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
   background: var(--card-hover);
-  border-color: rgba(139, 92, 246, 0.4);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 16px var(--accent-soft);
+  border-color: rgba(139, 92, 246, 0.45);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-soft);
 }
 
 .card:focus-within {
@@ -351,10 +380,10 @@ a:hover {
   position: relative;
   width: 100%;
   padding-bottom: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   border-radius: 12px;
-  background: #110c1c;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #0e0917;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
 
@@ -366,6 +395,11 @@ a:hover {
   height: 100%;
   object-fit: contain;
   padding: 6px;
+  transition: transform 0.2s ease-out;
+}
+
+.card:hover .thumb img {
+  transform: scale(1.05);
 }
 
 .thumb.missing::after {
@@ -382,15 +416,15 @@ a:hover {
   position: absolute;
   top: 6px;
   right: 6px;
-  padding: 2px 8px;
+  padding: 3px 9px;
   border-radius: 999px;
-  background: rgba(18, 13, 29, 0.9);
-  border: 1px solid rgba(251, 191, 36, 0.4);
+  background: rgba(14, 9, 23, 0.92);
+  border: 1px solid rgba(251, 191, 36, 0.45);
   color: #fde68a;
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 0.74rem;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .gift-name,
@@ -405,8 +439,8 @@ a:hover {
 }
 
 .gift-name {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 700;
   line-height: 1.25;
   color: var(--text);
   display: -webkit-box;
@@ -417,8 +451,8 @@ a:hover {
 
 .gift-id {
   color: var(--muted);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 0.75rem;
+  font-family: Consolas, "Cascadia Mono", monospace;
+  font-size: 0.76rem;
 }
 
 .gift-name:hover,
@@ -447,13 +481,13 @@ a:hover {
 }
 
 .load-more {
-  padding: 12px 28px;
+  padding: 12px 30px;
   border-radius: 999px;
   border: 1px solid var(--line);
   background: var(--bg-soft);
   color: var(--text);
   font: inherit;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.92rem;
   cursor: pointer;
   transition: border-color 0.15s, background 0.15s, transform 0.15s, box-shadow 0.15s;
@@ -462,8 +496,8 @@ a:hover {
 .load-more:hover {
   border-color: var(--accent);
   background: var(--card-hover);
-  box-shadow: 0 4px 18px var(--glow);
-  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--glow);
+  transform: translateY(-2px);
 }
 
 /* ---------- toast ---------- */
@@ -471,20 +505,20 @@ a:hover {
 .toast {
   position: fixed;
   left: 50%;
-  bottom: 24px;
-  transform: translate(-50%, 12px);
-  padding: 12px 20px;
-  border-radius: 12px;
+  bottom: 28px;
+  transform: translate(-50%, 14px);
+  padding: 12px 22px;
+  border-radius: 999px;
   background: #ede9f7;
   color: #0b0812;
   font-size: 0.88rem;
   font-weight: 700;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.18s, transform 0.18s;
+  transition: opacity 0.2s, transform 0.2s;
   max-width: min(90vw, 440px);
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--glow);
   z-index: 100;
 }
 
@@ -508,25 +542,27 @@ a:hover {
 
 .site-footer {
   border-top: 1px solid var(--line);
-  margin-top: 60px;
-  padding: 34px 0 44px;
+  margin-top: 70px;
+  padding: 38px 0 48px;
   color: var(--muted);
   font-size: 0.88rem;
+  background: rgba(7, 5, 11, 0.6);
 }
 
 .site-footer .container {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 
 .footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px 20px;
+  gap: 8px 24px;
 }
 
 .footer-links a {
   color: var(--muted);
+  font-weight: 500;
 }
 
 .footer-links a:hover {
@@ -535,30 +571,42 @@ a:hover {
 }
 
 .footer-disclaimer {
-  font-size: 0.8rem;
-  opacity: 0.85;
+  font-size: 0.82rem;
+  opacity: 0.8;
+  line-height: 1.5;
 }
 
 /* ---------- responsive ---------- */
 
 @media (max-width: 640px) {
   .site-header .container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .brand {
     justify-content: center;
   }
+  .main-nav {
+    justify-content: flex-start;
+    padding-bottom: 2px;
+  }
   .controls-card {
-    padding: 14px;
+    padding: 16px;
   }
   .sort {
     flex: 1 1 140px;
   }
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 10px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   * {
-    transition: none !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
