@@ -1,7 +1,7 @@
-# gift-db
+# gift-db — Katalog Gift TikTok (Xyra Streamer Hub)
 
 Katalog gift TikTok LIVE per region, di-dump lewat [`tiktok-live-connector@2.5.0`](https://github.com/zerodytrash/TikTok-Live-Connector)
-(`fetchAvailableGifts()` → endpoint webcast `gift/list/`).
+(`fetchAvailableGifts()` → endpoint webcast `gift/list/`). Digunakan sebagai database referensi untuk aplikasi **Xyra Streamer Hub** dan game streamer panel.
 
 > Untuk AI/agent: baca [`AGENTS.md`](./AGENTS.md) — berisi gotcha API, mapping field, dan aturan repo.
 

@@ -97,6 +97,10 @@ Entri di-dedupe per `name`, diurutkan `coin` naik → `displayName` → `name`.
 
 ## Status terakhir
 
+- 2026-11-26: Integrasi visual dan navigasi dengan Xyra Streamer Hub (`xyra-streamer-hub`):
+  - Navbar disamakan persis dengan menu Xyra Streamer Hub (Home, Cara Pakai, Download, FAQ, Changelog, Katalog Gift).
+  - Tema diubah ke tema gelap aksen ungu Xyra Studio (`#0b0812`, aksen `#8b5cf6`, logo Xyra Studio di `docs/assets/logo.png`).
+  - Footer dengan disclaimer dan navigasi resmi ditambahkan.
 - 2026-11-25: `data/gifts.json` = 793 gift, `region: "ID"`, sumber room `@aa.syarip`
   (roomId 7712114499398175509). Sign server menolak (plan gratis) → jalur unsigned dipakai.
 - Semua jalur diuji: `--help`, validasi argumen, akun tidak live, `--merge`, `--out`, region US.
